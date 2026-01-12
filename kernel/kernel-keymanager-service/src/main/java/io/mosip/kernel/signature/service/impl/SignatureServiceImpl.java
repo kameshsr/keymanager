@@ -9,14 +9,7 @@ import java.security.cert.X509Certificate;
 import java.security.cert.Certificate;
 import java.security.spec.InvalidKeySpecException;
 import java.security.spec.X509EncodedKeySpec;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.ArrayList;
-import java.util.Set;
-import java.util.HashSet;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 
@@ -518,6 +511,16 @@ public class SignatureServiceImpl implements SignatureService, SignatureServicev
         final Certificate certToVerify = (certFromHeader != null)
                 ? certFromHeader
                 : getCertificateToVerify(reqCertData, applicationId, referenceId);
+		
+		System.out.println("----------");
+		System.out.println("jwtToken "+ Arrays.toString(jwtTokens));
+		System.out.println("----------");
+		System.out.println("encodedActualData "+encodedActualData);
+		System.out.println("----------");
+		System.out.println("certToVerify "+certToVerify);
+		System.out.println("-----------");
+		System.out.println("SignedData "+signedData);
+		System.out.println("----------");
 
         // Verify signature (verifySignature handles detached payload when encodedActualData != null)
         final boolean signatureValid = verifySignature(jwtTokens, encodedActualData, certToVerify);
